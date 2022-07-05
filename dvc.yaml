@@ -1,0 +1,51 @@
+stages:
+
+  raw_dataset_creation:
+
+    cmd: python src/data/load_data.py --config=params.yaml
+
+    deps:
+
+    - src/data/load_data.py
+
+    - data/external/train.csv
+
+    outs:
+    - data/raw/train.csv
+  
+
+  split_data:
+
+    cmd: python src/data/split_data.py --config=params.yaml
+
+    deps:
+
+    - src/data/split_data.py
+
+    - data/raw/train.csv
+
+    outs:
+
+    - data/processed/diabetes_train.csv
+
+    - data/processed/diabetes_test.csv
+
+
+
+  model_train:
+
+    cmd: python src/models/train_model.py --config=params.yaml
+
+    deps:
+
+    - data/processed/diabetes_train.csv
+
+    - data/processed/diabetes_test.csv
+
+    - src/models/train_model.py
+
+    params:
+
+    - ada_boost.learning_rate
+    - ada_boost.n_estimators
+

@@ -1,0 +1,6 @@
+Param - n_estimators : 10
+Param - learning_rate : 0.1
+Accuracy: 0.7359307359307359
+Precision: 0.7859793267956533
+Recall: 0.7359307359307359
+f1_score: 0.6993841766542063

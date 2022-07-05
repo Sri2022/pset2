@@ -1,0 +1,47 @@
+schema: '2.0'
+stages:
+  raw_dataset_creation:
+    cmd: python src/data/load_data.py --config=params.yaml
+    deps:
+    - path: data/external/train.csv
+      md5: b43dd020fa775d93fced49f959c227ed
+      size: 23873
+    - path: src/data/load_data.py
+      md5: f351f73b68fe103bec73b93822a1f9a2
+      size: 1492
+    outs:
+    - path: data/raw/train.csv
+      md5: 60acca81995dc9744b499005ecfe6f2a
+      size: 24059
+  split_data:
+    cmd: python src/data/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/train.csv
+      md5: 60acca81995dc9744b499005ecfe6f2a
+      size: 24059
+    - path: src/data/split_data.py
+      md5: 0ef77ef3835fce224703641db85472fd
+      size: 1395
+    outs:
+    - path: data/processed/diabetes_test.csv
+      md5: 5faf691ee706e53d9f0ea1d2ca65d6bf
+      size: 7267
+    - path: data/processed/diabetes_train.csv
+      md5: 137e1ceb76bfde94d7163b250c82d7ca
+      size: 16890
+  model_train:
+    cmd: python src/models/train_model.py --config=params.yaml
+    deps:
+    - path: data/processed/diabetes_test.csv
+      md5: 5faf691ee706e53d9f0ea1d2ca65d6bf
+      size: 7267
+    - path: data/processed/diabetes_train.csv
+      md5: 137e1ceb76bfde94d7163b250c82d7ca
+      size: 16890
+    - path: src/models/train_model.py
+      md5: 552b8f8cb2283fecf08f5233fa2e88f3
+      size: 3627
+    params:
+      params.yaml:
+        ada_boost.learning_rate: 0.1
+        ada_boost.n_estimators: 10

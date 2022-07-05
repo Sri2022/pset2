@@ -22,8 +22,8 @@ mlflow_config:
   remote_server_uri: http://localhost:1234
  
 ada_boost: 
-  learning_rate: 0.1
-  n_estimators: 10
+  learning_rate: 0.01
+  n_estimators: 14
 
 model_dir: models/model.joblib
 

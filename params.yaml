@@ -23,7 +23,7 @@ mlflow_config:
  
 ada_boost: 
   learning_rate: 0.1
-  n_estimators: 10
+  n_estimators: 14
 
 model_dir: models/model.joblib
 

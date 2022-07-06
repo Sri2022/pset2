@@ -1,11 +1,8 @@
 pset2
 ==============================
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
-# pset2
-code to implement mlops using git dvc cml and aws
-
-Project Organization
+This project depicts e2e implementation of mlops for a machine learning model using the below set of tools. The ML mpdel trained in this project predicts the chances of person having diabetes based on certain parameters like BloodSugarLevel, Glucose, skinthickness etc. The model is trained using AdaBoostClassifier and data source is kaggle. <br/>
+1. CookieCutter - to provide the proper folder structure or scaffolding, so that modularity of the code is maintained.<br/>
+Project Organization <br/>
 ------------
 
     ├── LICENSE
@@ -52,6 +49,42 @@ Project Organization
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+2.The visual studio code is used as IDE during development on local machine. 
+3. Git hub is used as code versioning tool and DVC as data versioning tool.
+4. The entire training process is divided into set of stages and mentioned in the dvc.yaml file 
+   The source data is placed under data/external in the form of csv. The stages mentioned in the dvc.yaml executes in sequential order. The example of 2 different stages are added for reference. <br/>
+               stages: <br/>
+              raw_dataset_creation: <br/>
+                cmd: python src/data/load_data.py --config=params.yaml <br/>
+                deps: <br/>
+                - src/data/load_data.py <br/>
+                - data/external/train.csv <br/>
+                outs: <br/>
+                - data/raw/train.csv <br/>
+              split_data: <br/>
+                cmd: python src/data/split_data.py --config=params.yaml <br/>
+                deps: <br/>
+                - src/data/split_data.py <br/>
+                - data/raw/train.csv <br/>
+                outs: <br/>
+                - data/processed/diabetes_train.csv <br/>
+                - data/processed/diabetes_test.csv  <br/>
+    
+   In the current project, the stages are divided as 
+   raw_dataset_creation  - load the data from csv and convert it to pandas dataframe
+   split_data - split the data into train and test split 
+   model_train - train the data using AdaboostClassifier from sklearn with 2 parameters n_estimators and learning_rate. 
+5. All these configuration details related stages has been added in params.yaml
+6. whenver the code change is done , used git commands to add(git add filename) , commit(git commit -m 'message') and push(git push origin brnach) it to remote repo
+7. As DVC is used, the data files will not be stored on git, instead only a refernce to the data file will be added in git ex. train.csv.dvc <br/>
+8. new data files are added to dvc using dvc add command
+9. All the dependencies required for the project is mentioned in requirements.txt
+10. CML is integrated , through git hub workflow, which monitors metric evaluation, comparing ML experiments across your project history
+11. whenever a new code is pushed remote repo, the cml.yaml workflow will initiate,executes the job mentioned and output the metrics to metrics.txt and confusio matrix as an image file.
+12.Further new branches are created and some parameters of the models are tuned and pushed to the repo, cml.yaml initiated the workflow and shows the differnece between metrics. Later we can merge the new branch with better results(trial1) to the main branch.
+13. After all this setup, the code is moved to aws container, using cloud9 service of aws console.
+
+  
 
 
 --------

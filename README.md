@@ -73,7 +73,7 @@ Project Organization <br/>
    In the current project, the stages are divided as 
    raw_dataset_creation  - load the data from csv and convert it to pandas dataframe
    split_data - split the data into train and test split 
-   model_train - train the data using AdaboostClassifier from sklearn with 2 parameters n_estimators and learning_rate. 
+   model_train - train the data using AdaboostClassifier from sklearn with 2 parameters n_estimators and learning_rate.  <br/>
 5. All these configuration details related stages has been added in params.yaml <br/>
 6. whenver the code change is done , used git commands to add(git add filename) , commit(git commit -m 'message') and push(git push origin brnach) it to remote repo
 7. As DVC is used, the data files will not be stored on git, instead only a refernce to the data file will be added in git ex. train.csv.dvc <br/>

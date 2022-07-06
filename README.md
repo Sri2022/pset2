@@ -74,15 +74,15 @@ Project Organization <br/>
    raw_dataset_creation  - load the data from csv and convert it to pandas dataframe
    split_data - split the data into train and test split 
    model_train - train the data using AdaboostClassifier from sklearn with 2 parameters n_estimators and learning_rate. 
-5. All these configuration details related stages has been added in params.yaml
+5. All these configuration details related stages has been added in params.yaml <br/>
 6. whenver the code change is done , used git commands to add(git add filename) , commit(git commit -m 'message') and push(git push origin brnach) it to remote repo
 7. As DVC is used, the data files will not be stored on git, instead only a refernce to the data file will be added in git ex. train.csv.dvc <br/>
-8. new data files are added to dvc using dvc add command
+8. new data files are added to dvc using dvc add command <br/>
 9. All the dependencies required for the project is mentioned in requirements.txt
-10. CML is integrated , through git hub workflow, which monitors metric evaluation, comparing ML experiments across your project history
-11. whenever a new code is pushed remote repo, the cml.yaml workflow will initiate,executes the job mentioned and output the metrics to metrics.txt and confusio matrix as an image file.
-12.Further new branches are created and some parameters of the models are tuned and pushed to the repo, cml.yaml initiated the workflow and shows the differnece between metrics. Later we can merge the new branch with better results(trial1) to the main branch.
-13. After all this setup, the code is moved to aws container, using cloud9 service of aws console.
+10. CML is integrated , through git hub workflow, which monitors metric evaluation, comparing ML experiments across your project history <br/>
+11. whenever a new code is pushed remote repo, the cml.yaml workflow will initiate,executes the job mentioned and output the metrics to metrics.txt and confusio matrix as an image file. <br/>
+12.Further new branches are created and some parameters of the models are tuned and pushed to the repo, cml.yaml initiated the workflow and shows the differnece between metrics. Later we can merge the new branch with better results(trial1) to the main branch. <br/>
+13. After all this setup, the code is moved to aws container, using cloud9 service of aws console. <br/>
 
   
 
